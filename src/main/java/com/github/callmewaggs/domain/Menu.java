@@ -1,4 +1,4 @@
-package domain;
+package com.github.callmewaggs.domain;
 
 public class Menu {
 

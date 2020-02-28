@@ -1,4 +1,4 @@
-package domain;
+package com.github.callmewaggs.domain;
 
 import java.util.ArrayList;
 import java.util.List;
