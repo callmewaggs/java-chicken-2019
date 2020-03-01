@@ -1,4 +1,4 @@
-package com.github.callmewaggs.domain;
+package com.github.callmewaggs.posconsole.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

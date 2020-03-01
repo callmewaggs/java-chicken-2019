@@ -1,4 +1,4 @@
-package com.github.callmewaggs.domain;
+package com.github.callmewaggs.posconsole.domain;
 
 public class Menu {
 

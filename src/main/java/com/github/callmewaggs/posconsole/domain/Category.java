@@ -1,4 +1,4 @@
-package com.github.callmewaggs.domain;
+package com.github.callmewaggs.posconsole.domain;
 
 public enum Category {
   CHICKEN("치킨"),
