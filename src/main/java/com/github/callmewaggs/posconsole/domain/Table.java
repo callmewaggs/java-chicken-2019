@@ -42,6 +42,10 @@ public class Table {
     }
   }
 
+  public boolean hasOrder() {
+    return !orderList.isEmpty();
+  }
+
   public void initOrderList() {
     this.orderList = new ArrayList<>();
   }
