@@ -23,7 +23,7 @@ public class POSOrderingProcessor implements POSProcessor {
   private Table getInputAndFindTable() {
     final List<Table> tables = TableRepository.tables();
     OutputView.printTables(tables);
-    final int tableNumber = InputView.inputTableNumber();
+    final int tableNumber = InputView.inputTableNumberToOrder();
     return TableRepository.findTableByNumber(tableNumber);
   }
 

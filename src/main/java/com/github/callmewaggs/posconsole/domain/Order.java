@@ -17,4 +17,13 @@ public class Order {
   public int getQuantity() {
     return quantity;
   }
+
+  public int getAmount() {
+    return menu.getPrice() * quantity;
+  }
+
+  @Override
+  public String toString() {
+    return menu.getName() + " " + quantity + " " + getAmount();
+  }
 }

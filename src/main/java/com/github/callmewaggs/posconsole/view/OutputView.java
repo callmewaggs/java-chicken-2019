@@ -2,6 +2,7 @@ package com.github.callmewaggs.posconsole.view;
 
 import com.github.callmewaggs.posconsole.POSCommand;
 import com.github.callmewaggs.posconsole.domain.Menu;
+import com.github.callmewaggs.posconsole.domain.Order;
 import com.github.callmewaggs.posconsole.domain.Table;
 import java.util.Arrays;
 import java.util.List;
@@ -60,5 +61,18 @@ public class OutputView {
 
   public static void printMessage(String message) {
     System.out.println(message);
+  }
+
+  public static void printOrderList(List<Order> orderList) {
+    System.out.println("## 주문내역");
+    System.out.println("메뉴 수량 금액");
+    for (Order order : orderList) {
+      System.out.println(order.toString());
+    }
+  }
+
+  public static void printTotalAmount(int totalAmount) {
+    System.out.println("## 최종 결제할 금액");
+    System.out.println(totalAmount + "원");
   }
 }
