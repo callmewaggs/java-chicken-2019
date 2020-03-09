@@ -1,7 +1,6 @@
 package com.github.callmewaggs.posconsole.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -20,7 +19,7 @@ class TableRepositoryTest {
     Table table = TableRepository.findTableByNumber(number);
 
     // Assert
-    assertNotNull(table);
+    assertEquals(new Table(1), table);
   }
 
   @DisplayName("테이블 번호에 해당하는 테이블이 없다면 예외를 던진다.")

@@ -4,17 +4,17 @@ import com.github.callmewaggs.posconsole.domain.Order;
 import com.github.callmewaggs.posconsole.domain.Table;
 import com.github.callmewaggs.posconsole.domain.TableRepository;
 import com.github.callmewaggs.posconsole.processor.payment.PaymentMethod;
-import com.github.callmewaggs.posconsole.processor.payment.PriceCalculator;
+import com.github.callmewaggs.posconsole.processor.payment.policies.DiscountPolicy;
 import com.github.callmewaggs.posconsole.view.InputView;
 import com.github.callmewaggs.posconsole.view.OutputView;
 import java.util.List;
 
 public class POSPaymentProcessor implements POSProcessor {
 
-  private PriceCalculator priceCalculator;
+  private DiscountPolicy discountPolicy;
 
-  public POSPaymentProcessor(PriceCalculator priceCalculator) {
-    this.priceCalculator = priceCalculator;
+  public POSPaymentProcessor(DiscountPolicy discountPolicy) {
+    this.discountPolicy = discountPolicy;
   }
 
   @Override
@@ -23,7 +23,10 @@ public class POSPaymentProcessor implements POSProcessor {
     List<Order> orderList = table.getOrderList();
     OutputView.printOrderList(orderList);
     PaymentMethod paymentMethod = getInputPaymentMethod();
-    int totalAmount = priceCalculator.calculate(orderList, paymentMethod);
+    int totalAmount = orderList.stream().mapToInt(Order::getAmount).sum();
+    if (discountPolicy.isSatisfied(orderList, paymentMethod)) {
+      totalAmount = discountPolicy.getDiscountedAmount(totalAmount);
+    }
     OutputView.printTotalAmount(totalAmount);
     table.initOrderList();
   }

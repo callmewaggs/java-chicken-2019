@@ -2,6 +2,7 @@ package com.github.callmewaggs.posconsole.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Table {
 
@@ -11,6 +12,24 @@ public class Table {
   public Table(final int number) {
     this.number = number;
     this.orderList = new ArrayList<>();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Table)) {
+      return false;
+    }
+    Table table = (Table) o;
+    return getNumber() == table.getNumber() &&
+        getOrderList().equals(table.getOrderList());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getNumber(), getOrderList());
   }
 
   public int getNumber() {
