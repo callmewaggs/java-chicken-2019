@@ -2,6 +2,7 @@ package com.github.callmewaggs.posconsole.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,7 @@ public class TableTest {
 
     // Assert
     assertEquals(1, table.getOrderList().size());
+    assertTrue(table.hasOrder());
   }
 
   @DisplayName("주문 내역을 테이블에 추가할 때, 한 메뉴에 대해 99개를 초과하여 주문하려는 경우 예외를 던진다.")

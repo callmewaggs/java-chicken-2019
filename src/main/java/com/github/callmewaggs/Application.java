@@ -7,7 +7,7 @@ import com.github.callmewaggs.posconsole.processor.POSPaymentProcessor;
 import com.github.callmewaggs.posconsole.processor.POSProcessor;
 import com.github.callmewaggs.posconsole.processor.POSQuitProcessor;
 import com.github.callmewaggs.posconsole.processor.payment.policies.DiscountPolicy;
-import com.github.callmewaggs.posconsole.processor.payment.policies.DuplicableDiscountPolicy;
+import com.github.callmewaggs.posconsole.processor.payment.policies.MultiDiscountPolicy;
 import com.github.callmewaggs.posconsole.processor.payment.policies.PaymentMethodDiscountPolicy;
 import com.github.callmewaggs.posconsole.processor.payment.policies.QuantityDiscountPolicy;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class Application {
         Arrays.asList(new PaymentMethodDiscountPolicy());
     List<DiscountPolicy> unduplicableDiscountPolicies = Arrays.asList(new QuantityDiscountPolicy());
     DiscountPolicy discountPolicy =
-        new DuplicableDiscountPolicy(duplicableDiscountPolicies, unduplicableDiscountPolicies);
+        new MultiDiscountPolicy(duplicableDiscountPolicies, unduplicableDiscountPolicies);
     return discountPolicy;
   }
 }
