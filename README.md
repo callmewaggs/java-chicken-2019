@@ -1,4 +1,36 @@
 # java-chicken-2019
+## Introduction
+
+![chicken](https://user-images.githubusercontent.com/35681772/76184197-58606d00-620e-11ea-8ffd-1257ec33d8ed.gif)
+
+이 프로젝트는 우아한 형제들의 '2019 우아한 테크코스' 의 오프라인 코딩 테스트 과제였습니다. 
+이를 시간이 지난 후에 TDD 를 연습하기 위한 목적으로 다시 개발 해 보았습니다.
+
+## 기술 스택
+ * Java 를 사용한 콘솔 프로젝트
+ * Using Gradle for build tool
+ * Add Junit5, Mockito for test
+
+## chickenPOS 아키텍쳐
+chickenPOS 는 OOP(Object-Oriented Programming) 의 관점에서 개발하려고 노력했습니다. 
+또한 콘솔 단과 비즈니스 로직을 분리하여 추후에 이것이 웹 프로젝트로 변경되더라도 도메인은 변화가 없도록 설계하였습니다.
+
+### Domain
+#### 제공된 도메인
+ * Category
+ * Menu
+ * MenuRepository
+ * Table
+ * TableRepository
+  
+#### 추가한 도메인
+ * Order : 주문 내역을 나타내며 메뉴와 수량을 알고 있습니다. 또한 테이블은 주문 내역을 알고 있기 때문에 해당 테이블의 결제 전까지 별도의 표시가 됩니다.
+ * DiscountAgency : 할인을 담당합니다. 할인 정책을 알고 있으며 이를 바탕으로 할인된 금액을 계산합니다.
+ * DiscountPolicy : 기능 요구사항을 반영하여 두 가지 할인 정책을 도출하였습니다. 
+ * PaymentMethod : 요구사항에 제시된 결제 수단을 반영하였습니다.
+ * POSProcessor : 기능 요구사항을 바탕으로 제공할 기능을 Processor 로 분리하였습니다. 따라서 추후에 기능이 추가되더라도 기존 코드는 별도의 수정이 필요하지 않습니다.
+ * POSCommand : 제공되는 기능을 나타냅니다.
+ * POSMachine : 사용자로부터 종료 요청을 받기 전 까지 계속 실행되는 서비스를 반영하였습니다.
 
 ## 기능 요구사항
  * 치킨집 사장님이 사용하는 간단한 포스(POS) 프로그램을 구현한다.   주문등록, 결제하기, 프로그램 종료 기능을 가진다.
