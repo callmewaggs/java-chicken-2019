@@ -8,5 +8,5 @@ public interface DiscountPolicy {
 
   boolean isSatisfied(List<Order> orderList, PaymentMethod paymentMethod);
 
-  int getDiscountedAmount(int amount);
+  int getDiscountPrice(int amount);
 }

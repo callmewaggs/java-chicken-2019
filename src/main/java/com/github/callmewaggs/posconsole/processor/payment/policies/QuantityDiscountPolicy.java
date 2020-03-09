@@ -23,8 +23,7 @@ public class QuantityDiscountPolicy implements DiscountPolicy {
   }
 
   @Override
-  public int getDiscountedAmount(int amount) {
-    int originalAmount = amount;
-    return originalAmount - (chickenQuantity / QUANTITY_DISCOUNT_UNIT * QUANTITY_DISCOUNT_PRICE);
+  public int getDiscountPrice(int amount) {
+    return chickenQuantity / QUANTITY_DISCOUNT_UNIT * QUANTITY_DISCOUNT_PRICE;
   }
 }

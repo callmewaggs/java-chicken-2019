@@ -14,8 +14,7 @@ public class PaymentMethodDiscountPolicy implements DiscountPolicy {
   }
 
   @Override
-  public int getDiscountedAmount(int amount) {
-    int originalAmount = amount;
-    return originalAmount - (int) (amount * CASH_DISCOUNT_PERCENTAGE);
+  public int getDiscountPrice(int amount) {
+    return (int) (amount * CASH_DISCOUNT_PERCENTAGE);
   }
 }

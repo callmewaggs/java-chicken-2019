@@ -6,8 +6,8 @@ import com.github.callmewaggs.posconsole.processor.POSOrderingProcessor;
 import com.github.callmewaggs.posconsole.processor.POSPaymentProcessor;
 import com.github.callmewaggs.posconsole.processor.POSProcessor;
 import com.github.callmewaggs.posconsole.processor.POSQuitProcessor;
+import com.github.callmewaggs.posconsole.processor.payment.DiscountAgency;
 import com.github.callmewaggs.posconsole.processor.payment.policies.DiscountPolicy;
-import com.github.callmewaggs.posconsole.processor.payment.policies.MultiDiscountPolicy;
 import com.github.callmewaggs.posconsole.processor.payment.policies.PaymentMethodDiscountPolicy;
 import com.github.callmewaggs.posconsole.processor.payment.policies.QuantityDiscountPolicy;
 import java.util.Arrays;
@@ -25,8 +25,8 @@ public class Application {
 
   private static Map<POSCommand, POSProcessor> getProcessors() {
     POSOrderingProcessor posOrderingProcessor = new POSOrderingProcessor();
-    DiscountPolicy discountPolicy = createDiscountPolicy();
-    POSPaymentProcessor posPaymentProcessor = new POSPaymentProcessor(discountPolicy);
+    DiscountAgency discountAgency = createDiscountAgency();
+    POSPaymentProcessor posPaymentProcessor = new POSPaymentProcessor(discountAgency);
     POSQuitProcessor posQuitProcessor = new POSQuitProcessor();
 
     return createProcessorMapping(posOrderingProcessor, posPaymentProcessor, posQuitProcessor);
@@ -43,12 +43,12 @@ public class Application {
     return processorMapping;
   }
 
-  private static DiscountPolicy createDiscountPolicy() {
-    List<DiscountPolicy> duplicableDiscountPolicies =
-        Arrays.asList(new PaymentMethodDiscountPolicy());
+  private static DiscountAgency createDiscountAgency() {
+    List<DiscountPolicy> duplicableDiscountPolicies = Arrays
+        .asList(new PaymentMethodDiscountPolicy());
     List<DiscountPolicy> unduplicableDiscountPolicies = Arrays.asList(new QuantityDiscountPolicy());
-    DiscountPolicy discountPolicy =
-        new MultiDiscountPolicy(duplicableDiscountPolicies, unduplicableDiscountPolicies);
-    return discountPolicy;
+    DiscountAgency discountAgency =
+        new DiscountAgency(duplicableDiscountPolicies, unduplicableDiscountPolicies);
+    return discountAgency;
   }
 }

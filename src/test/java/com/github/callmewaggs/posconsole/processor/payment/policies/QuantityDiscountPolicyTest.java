@@ -51,10 +51,10 @@ class QuantityDiscountPolicyTest {
     int amount = 10_000;
 
     // Act
-    int actual = quantityDiscountPolicy.getDiscountedAmount(amount);
+    int actual = quantityDiscountPolicy.getDiscountPrice(amount);
 
     // Assert
-    int expected = 0;
+    int expected = 10_000;
     assertEquals(expected, actual);
   }
 }

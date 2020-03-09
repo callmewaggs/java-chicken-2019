@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.github.callmewaggs.posconsole.processor.payment.DiscountAgency;
 import com.github.callmewaggs.posconsole.processor.payment.PaymentMethod;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +14,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MultiDiscountPolicyTest {
+class DiscountAgencyTest {
 
-  private MultiDiscountPolicy multiDiscountPolicy;
+  private DiscountAgency discountAgency;
   private List<DiscountPolicy> duplicable;
   private List<DiscountPolicy> unduplicable;
   private DiscountPolicy policy1;
@@ -27,7 +28,7 @@ class MultiDiscountPolicyTest {
     this.policy2 = mock(DiscountPolicy.class);
     this.duplicable = Arrays.asList(policy1);
     this.unduplicable = Arrays.asList(policy2);
-    this.multiDiscountPolicy = new MultiDiscountPolicy(duplicable, unduplicable);
+    this.discountAgency = new DiscountAgency(duplicable, unduplicable);
   }
 
   @Test
@@ -37,7 +38,7 @@ class MultiDiscountPolicyTest {
     when(policy2.isSatisfied(any(List.class), any(PaymentMethod.class))).thenReturn(false);
 
     // Act
-    boolean actual = multiDiscountPolicy.isSatisfied(new ArrayList<>(), PaymentMethod.CASH);
+    boolean actual = discountAgency.isDiscountable(new ArrayList<>(), PaymentMethod.CASH);
 
     // Assert
     assertTrue(actual);
@@ -47,16 +48,16 @@ class MultiDiscountPolicyTest {
   public void getDiscountedAmountTest() {
     // Arrange
     when(policy1.isSatisfied(any(List.class), any(PaymentMethod.class))).thenReturn(true);
-    when(policy1.getDiscountedAmount(any(Integer.class))).thenReturn(10_000);
+    when(policy1.getDiscountPrice(any(Integer.class))).thenReturn(10_000);
     when(policy2.isSatisfied(any(List.class), any(PaymentMethod.class))).thenReturn(true);
-    when(policy2.getDiscountedAmount(any(Integer.class))).thenReturn(10_000);
-    multiDiscountPolicy.isSatisfied(new ArrayList<>(), PaymentMethod.CASH);
+    when(policy2.getDiscountPrice(any(Integer.class))).thenReturn(10_000);
+    discountAgency.isDiscountable(new ArrayList<>(), PaymentMethod.CASH);
     int amount = 100_000;
 
     // Act
-    int actual = multiDiscountPolicy.getDiscountedAmount(amount);
+    int actual = discountAgency.getDiscountedAmount(amount);
 
     // Assert
-    assertEquals(10_000, actual);
+    assertEquals(80_000, actual);
   }
 }

@@ -35,10 +35,10 @@ class PaymentMethodDiscountPolicyTest {
     int amount = 10_000;
 
     // Actual
-    int actual = paymentMethodDiscountPolicy.getDiscountedAmount(amount);
+    int actual = paymentMethodDiscountPolicy.getDiscountPrice(amount);
 
     // Assert
-    int expected = amount - (int) (amount * PaymentMethodDiscountPolicy.CASH_DISCOUNT_PERCENTAGE);
+    int expected = (int) (amount * PaymentMethodDiscountPolicy.CASH_DISCOUNT_PERCENTAGE);
     assertEquals(expected, actual);
   }
 }
